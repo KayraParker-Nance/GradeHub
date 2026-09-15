@@ -1,3 +1,62 @@
 <resources>
     <string name="app_name">GradeHub</string>
+
+    <string name="home_title">GradeHub</string>
+    <string name="home_periods_label">Periods</string>
+    <string name="home_empty">No periods yet. Add a semester or term to start tracking grades.</string>
+    <string name="action_add_period">Add period</string>
+    <string name="action_add_module">Add module</string>
+    <string name="action_add_assessment">Add assessment</string>
+
+    <string name="period_empty">No modules in this period yet.</string>
+    <string name="module_empty">No assessments yet. Add one to start calculating your average.</string>
+
+    <string name="label_current_average">Current average</string>
+    <string name="label_secured">Secured</string>
+    <string name="label_completed_weight">Completed</string>
+    <string name="label_remaining_weight">Remaining</string>
+    <string name="label_exam_entrance">Exam entrance</string>
+    <string name="label_required_for_entrance">Required average for remaining class work</string>
+    <string name="label_target">Target</string>
+    <string name="label_projection">Projection</string>
+
+    <string name="status_yes">On track</string>
+    <string name="status_no">At risk</string>
+    <string name="status_na">N/A</string>
+
+    <string name="action_save">Save</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_cancel">Cancel</string>
+
+    <string name="settings_title">Settings</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_dark_mode">Dark mode</string>
+    <string name="settings_grade_display">Grade display</string>
+    <string name="settings_decimal_places">Decimal places</string>
+    <string name="settings_data">Data</string>
+    <string name="settings_export">Export data</string>
+    <string name="settings_import">Import data</string>
+    <string name="settings_reset">Reset data</string>
+    <string name="settings_reset_confirm_title">Reset all data?</string>
+    <string name="settings_reset_confirm_message">This permanently deletes every period, module and assessment. This can\'t be undone.</string>
+
+    <string name="hint_period_name">Period name (e.g. Semester 1)</string>
+    <string name="hint_start_date">Start date</string>
+    <string name="hint_end_date">End date</string>
+
+    <string name="hint_module_code">Module code (e.g. MATT202)</string>
+    <string name="hint_module_name">Module name</string>
+    <string name="hint_exam_weight">Exam weight (%)</string>
+    <string name="hint_exam_entrance_mark">Exam entrance mark (%)</string>
+    <string name="label_exam_entrance_required">Exam entrance required</string>
+    <string name="label_module_colour">Module colour</string>
+
+    <string name="hint_assessment_name">Assessment name</string>
+    <string name="hint_assessment_type">Type (e.g. Test, Quiz, Assignment)</string>
+    <string name="hint_assessment_weight">Weight (%)</string>
+    <string name="hint_assessment_mark">Mark (%)</string>
+    <string name="hint_assessment_date">Date</string>
+    <string name="label_completed">Completed</string>
+    <string name="label_class_mark">Class mark</string>
+    <string name="label_exam">Exam</string>
 </resources>

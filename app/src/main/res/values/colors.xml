@@ -2,4 +2,46 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Brand -->
+    <color name="brand_primary">#4B5FE3</color>
+    <color name="brand_primary_dark">#3244B8</color>
+    <color name="brand_primary_container_light">#E1E4FB</color>
+    <color name="brand_primary_container_dark">#2A3480</color>
+    <color name="brand_secondary">#12967F</color>
+
+    <!-- Surfaces / light -->
+    <color name="surface_light">#FFFFFF</color>
+    <color name="surface_variant_light">#F1F2FA</color>
+    <color name="background_light">#F7F7FC</color>
+    <color name="on_surface_light">#1C1B1F</color>
+    <color name="on_surface_variant_light">#5C5D6E</color>
+    <color name="outline_light">#DEDFEB</color>
+
+    <!-- Surfaces / dark -->
+    <color name="surface_dark">#1B1B22</color>
+    <color name="surface_variant_dark">#26262F</color>
+    <color name="background_dark">#131318</color>
+    <color name="on_surface_dark">#E7E7EF</color>
+    <color name="on_surface_variant_dark">#B5B5C4</color>
+    <color name="outline_dark">#3A3A45</color>
+
+    <!-- Semantic grade colours -->
+    <color name="grade_good">#2E9E5B</color>
+    <color name="grade_borderline">#E29B10</color>
+    <color name="grade_risk">#D6483F</color>
+
+    <color name="grade_good_container">#DEF3E5</color>
+    <color name="grade_borderline_container">#FBEED1</color>
+    <color name="grade_risk_container">#F8DEDC</color>
+
+    <!-- Module accent swatches (used for Colour enum + colour picker chips) -->
+    <color name="swatch_indigo">#4B5FE3</color>
+    <color name="swatch_teal">#12967F</color>
+    <color name="swatch_orange">#E58A2A</color>
+    <color name="swatch_rose">#D5497B</color>
+    <color name="swatch_purple">#8A4FD1</color>
+    <color name="swatch_blue">#2B87D8</color>
+    <color name="swatch_green">#3F9B4F</color>
+    <color name="swatch_amber">#D6A419</color>
 </resources>

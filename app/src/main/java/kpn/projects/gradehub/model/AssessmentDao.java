@@ -11,7 +11,7 @@ import java.util.List;
 @Dao
 public interface AssessmentDao {
     @Insert
-    void insert(Assessment assessment);
+    long insert(Assessment assessment);
 
     @Update
     void update(Assessment assessment);
@@ -30,4 +30,7 @@ public interface AssessmentDao {
 
     @Query("SELECT * FROM assessments WHERE moduleId = :moduleId AND completed = 0")
     List<Assessment> getIncompleteAssessmentsForModule(long moduleId);
+
+    @Query("DELETE FROM assessments")
+    void deleteAll();
 }

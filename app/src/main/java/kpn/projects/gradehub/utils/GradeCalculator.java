@@ -1,4 +1,4 @@
-package kpn.projects.gradehub;
+package kpn.projects.gradehub.utils;
 
 import java.util.List;
 
@@ -88,5 +88,13 @@ public class GradeCalculator {
         double remainingWeight = calculateTotalRemainingWeight(assessments);
 
         return ((currentAverage * currentWeight / 100) + (remainingAverage * remainingWeight / 100));
+    }
+
+    public enum GradeStatus { GOOD, BORDERLINE, RISK }
+
+    public static GradeStatus classify(double average) {
+        if (average >= 60) return GradeStatus.GOOD;
+        if (average >= 50) return GradeStatus.BORDERLINE;
+        return GradeStatus.RISK;
     }
 }

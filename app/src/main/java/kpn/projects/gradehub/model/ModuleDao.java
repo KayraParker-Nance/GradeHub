@@ -11,7 +11,7 @@ import java.util.List;
 @Dao
 public interface ModuleDao {
     @Insert
-    void insert(Module module);
+    long insert(Module module);
 
     @Update
     void update(Module module);
@@ -27,4 +27,7 @@ public interface ModuleDao {
 
     @Query("SELECT * FROM modules")
     List<Module> getModules();
+
+    @Query("DELETE FROM modules")
+    void deleteAll();
 }

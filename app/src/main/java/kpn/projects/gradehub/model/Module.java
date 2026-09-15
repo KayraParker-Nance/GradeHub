@@ -24,4 +24,82 @@ public class Module {
     private boolean examEntranceRequired;
     private double examEntranceMark;
     private Colour moduleColour;
+
+    public Module() {
+    }
+
+    public Module(long periodId, String code, String name, double examWeight,
+                  boolean examEntranceRequired, double examEntranceMark, Colour moduleColour) {
+        this.periodId = periodId;
+        this.code = code;
+        this.name = name;
+        this.examWeight = examWeight;
+        this.examEntranceRequired = examEntranceRequired;
+        this.examEntranceMark = examEntranceMark;
+        this.moduleColour = moduleColour;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getPeriodId() {
+        return periodId;
+    }
+
+    public void setPeriodId(long periodId) {
+        this.periodId = periodId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public double getExamWeight() {
+        return examWeight;
+    }
+
+    public void setExamWeight(double examWeight) {
+        this.examWeight = examWeight;
+    }
+
+    public boolean isExamEntranceRequired() {
+        return examEntranceRequired;
+    }
+
+    public void setExamEntranceRequired(boolean examEntranceRequired) {
+        this.examEntranceRequired = examEntranceRequired;
+    }
+
+    public double getExamEntranceMark() {
+        return examEntranceMark;
+    }
+
+    public void setExamEntranceMark(double examEntranceMark) {
+        this.examEntranceMark = examEntranceMark;
+    }
+
+    public Colour getModuleColour() {
+        return moduleColour;
+    }
+
+    public void setModuleColour(Colour moduleColour) {
+        this.moduleColour = moduleColour;
+    }
 }

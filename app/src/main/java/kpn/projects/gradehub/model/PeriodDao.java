@@ -11,7 +11,7 @@ import java.util.List;
 @Dao
 public interface PeriodDao {
     @Insert
-    void insert(Period period);
+    long insert(Period period);
 
     @Update
     void update(Period period);
@@ -24,4 +24,7 @@ public interface PeriodDao {
 
     @Query("SELECT * FROM periods")
     List<Period> getPeriods();
+
+    @Query("DELETE FROM periods")
+    void deleteAll();
 }
