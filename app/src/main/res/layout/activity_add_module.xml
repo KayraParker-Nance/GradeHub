@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Module"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edtModuleCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Module code" />
+
+    <EditText
+        android:id="@+id/edtModuleName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Module name" />
+
+    <EditText
+        android:id="@+id/edtExamWeight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Exam weight (%)"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/edtExamEntranceMark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Exam entrance mark (%)"
+        android:inputType="numberDecimal" />
+
+    <CheckBox
+        android:id="@+id/chkExamEntranceRequired"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Exam entrance required" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Module colour" />
+
+    <EditText
+        android:id="@+id/edtModuleColour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Colour" />
+
+    <Button
+        android:id="@+id/btnSaveModule"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save" />
+
+</LinearLayout>
