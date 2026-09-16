@@ -1,64 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="?android:attr/colorBackground">
 
-    <TextView
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Module"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:background="?android:attr/colorBackground"
+        android:elevation="0dp">
 
-    <EditText
-        android:id="@+id/edtModuleCode"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="Add Module" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Module code" />
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <EditText
-        android:id="@+id/edtModuleName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Module name" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-    <EditText
-        android:id="@+id/edtExamWeight"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Exam weight (%)"
-        android:inputType="numberDecimal" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_module_code">
 
-    <EditText
-        android:id="@+id/edtExamEntranceMark"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Exam entrance mark (%)"
-        android:inputType="numberDecimal" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtModuleCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapCharacters" />
 
-    <CheckBox
-        android:id="@+id/chkExamEntranceRequired"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Exam entrance required" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Module colour" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:hint="@string/hint_module_name">
 
-    <EditText
-        android:id="@+id/edtModuleColour"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Colour" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtModuleName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/btnSaveModule"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-</LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:hint="@string/hint_exam_weight">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtExamWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switchExamEntranceRequired"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="@string/label_exam_entrance_required" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutExamEntranceMark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:hint="@string/hint_exam_entrance_mark"
+                android:visibility="gone">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtExamEntranceMark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/label_module_colour"
+                android:textAppearance="@style/TextAppearance.GradeHub.SectionLabel" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupColour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:singleLine="false"
+                app:singleSelection="true" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSaveModule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="@string/action_save" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

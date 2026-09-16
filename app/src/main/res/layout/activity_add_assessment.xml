@@ -1,86 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:background="?android:attr/colorBackground"
+        android:elevation="0dp">
 
-        <TextView
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_back"
+            app:title="Add Assessment" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Assessment"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <EditText
-            android:id="@+id/edtAssessmentName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Assessment name" />
-
-        <EditText
-            android:id="@+id/edtAssessmentType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Type" />
-
-        <EditText
-            android:id="@+id/edtAssessmentWeight"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Weight (%)"
-            android:inputType="numberDecimal" />
-
-        <EditText
-            android:id="@+id/edtAssessmentMark"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Mark (%)"
-            android:inputType="numberDecimal" />
-
-        <EditText
-            android:id="@+id/edtAssessmentDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Date"
-            android:inputType="date"
-            android:focusable="false"
-            android:clickable="true"/>
-
-        <CheckBox
-            android:id="@+id/chkCompleted"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Completed" />
-
-        <RadioGroup
-            android:id="@+id/rgpMarkType"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RadioButton
-                android:id="@+id/rdbClassMark"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Class Mark" />
+                android:hint="@string/hint_assessment_name">
 
-            <RadioButton
-                android:id="@+id/rdbExam"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtAssessmentName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Exam" />
-        </RadioGroup>
+                android:layout_marginTop="14dp"
+                android:hint="@string/hint_assessment_type">
 
-        <Button
-            android:id="@+id/btnSaveAssessment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtAssessmentType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-    </LinearLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-</ScrollView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:hint="@string/hint_assessment_weight">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtAssessmentWeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:hint="@string/hint_assessment_mark">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtAssessmentMark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:hint="@string/hint_assessment_date"
+                app:endIconDrawable="@drawable/ic_calendar"
+                app:endIconMode="custom">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtAssessmentDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:focusable="false" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switchCompleted"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="@string/label_completed" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Counts toward"
+                android:textAppearance="@style/TextAppearance.GradeHub.SectionLabel" />
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/toggleMarkType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnClassMark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/label_class_mark" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnExam"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/label_exam" />
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSaveAssessment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="@string/action_save" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

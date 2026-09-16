@@ -1,6 +1,7 @@
 package kpn.projects.gradehub.utils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import kpn.projects.gradehub.model.Assessment;
 
@@ -8,7 +9,7 @@ public class GradeCalculator {
     public static double calculateCurrentAverage(List<Assessment> assessments){
         List<Assessment> completedAssessments = assessments.stream()
                 .filter(Assessment::isCompleted)
-                .toList();
+                .collect(Collectors.toList());
 
         double totalWeight = completedAssessments.stream()
                 .mapToDouble(Assessment::getWeight)
@@ -43,6 +44,15 @@ public class GradeCalculator {
                 .filter(Assessment::countsForClassMark)
                 .mapToDouble(Assessment::getWeight)
                 .sum();
+    }
+
+    public static double calculateRequiredAverageForTarget(List<Assessment> assessments, double target){
+        double secured = calculateSecuredMark(assessments);
+        double remainingWeight = calculateTotalRemainingWeight(assessments);
+
+        if (remainingWeight == 0) return -1; //no more work to do
+
+        return (target - secured) * 100 / remainingWeight;
     }
 
     public static double calculateRequiredAverageForExamEntrance(List<Assessment> assessments, double examEntryMark){
