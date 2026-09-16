@@ -66,7 +66,10 @@ public class GradeCalculator {
 
         if (remainingWeight == 0) return -1; //no more work to do
 
-        return  (examEntryMark - (currentAverage * currentWeight / 100)) * 100 / remainingWeight;
+        double requiredSecuredMark = examEntryMark * getExamWeight(assessments) / 100;
+
+        return (requiredSecuredMark - (currentAverage * currentWeight / 100)) * 100 / remainingWeight;
+
     }
 
     public static boolean calculateExamEntrance(List<Assessment> assessments, double examEntryMark){

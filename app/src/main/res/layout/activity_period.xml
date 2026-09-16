@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_back"
-            app:title="Semester 1" />
+            app:title="Semester 1"
+            app:menu="@menu/menu_period"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

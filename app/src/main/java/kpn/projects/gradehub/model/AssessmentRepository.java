@@ -43,4 +43,11 @@ public class AssessmentRepository {
             if (onComplete != null) executors.mainThread().execute(onComplete);
         });
     }
+
+    public void getAssessment(long id, DataCallback<Assessment> callback) {
+        executors.diskIO().execute(() -> {
+            Assessment assessment = dao.getAssessmentById(id);
+            executors.mainThread().execute(() -> callback.onResult(assessment));
+        });
+    }
 }

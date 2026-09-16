@@ -84,4 +84,11 @@ public class ModuleRepository {
             if (onComplete != null) executors.mainThread().execute(onComplete);
         });
     }
+
+    public void getModule(long id, DataCallback<Module> callback) {
+        executors.diskIO().execute(() -> {
+            Module module = moduleDao.getModuleById(id);
+            executors.mainThread().execute(() -> callback.onResult(module));
+        });
+    }
 }

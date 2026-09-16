@@ -21,8 +21,11 @@ import kpn.projects.gradehub.model.PeriodRepository;
 
 public class AddPeriodActivity extends AppCompatActivity {
 
+    public static final String EXTRA_PERIOD_ID = "extra_period_id";
+
     private ActivityAddPeriodBinding binding;
     private PeriodRepository repository;
+    private Period editingPeriod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,24 @@ public class AddPeriodActivity extends AppCompatActivity {
         binding.edtStartDate.setOnClickListener(v -> showDatePicker(binding.edtStartDate));
         binding.edtEndDate.setOnClickListener(v -> showDatePicker(binding.edtEndDate));
         binding.btnSavePeriod.setOnClickListener(v -> save());
+
+        long periodId = getIntent().getLongExtra(EXTRA_PERIOD_ID, -1);
+        if (periodId != -1) {
+            binding.toolbar.setTitle("Edit Period");
+            binding.btnSavePeriod.setText(R.string.action_update);
+            repository.getPeriod(periodId, this::bindForEdit);
+        }
+    }
+
+    private void bindForEdit(Period period) {
+        if (period == null) {
+            finish();
+            return;
+        }
+        editingPeriod = period;
+        binding.edtPeriodName.setText(period.getName());
+        binding.edtStartDate.setText(period.getStartDate());
+        binding.edtEndDate.setText(period.getEndDate());
     }
 
     private void showDatePicker(com.google.android.material.textfield.TextInputEditText target) {
@@ -62,16 +83,24 @@ public class AddPeriodActivity extends AppCompatActivity {
             return;
         }
 
-        Period period = new Period(name, start, end);
-        repository.insert(period, id -> {
-            Toast.makeText(this, "Period added", Toast.LENGTH_SHORT).show();
-            finish();
-        });
+        if (editingPeriod != null) {
+            editingPeriod.setName(name);
+            editingPeriod.setStartDate(start);
+            editingPeriod.setEndDate(end);
+            repository.update(editingPeriod, () -> {
+                Toast.makeText(this, "Period updated", Toast.LENGTH_SHORT).show();
+                finish();
+            });
+        } else {
+            Period period = new Period(name, start, end);
+            repository.insert(period, id -> {
+                Toast.makeText(this, "Period added", Toast.LENGTH_SHORT).show();
+                finish();
+            });
+        }
     }
 
     private String textOf(com.google.android.material.textfield.TextInputEditText editText) {
         return editText.getText() == null ? "" : editText.getText().toString().trim();
     }
-
-
 }

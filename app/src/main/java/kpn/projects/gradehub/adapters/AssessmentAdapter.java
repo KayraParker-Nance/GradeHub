@@ -20,12 +20,18 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
         void onDelete(Assessment assessment);
     }
 
+    public interface OnAssessmentEditListener {
+        void onEdit(Assessment assessment);
+    }
+
     private final List<Assessment> items = new ArrayList<>();
     private final OnAssessmentActionListener listener;
+    private final OnAssessmentEditListener editListener;
     private int decimalPlaces = 1;
 
-    public AssessmentAdapter(OnAssessmentActionListener listener) {
+    public AssessmentAdapter(OnAssessmentActionListener listener, OnAssessmentEditListener editListener) {
         this.listener = listener;
+        this.editListener = editListener;
     }
 
     public void submitList(List<Assessment> newItems) {
@@ -76,6 +82,10 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
                     "Mark: %s · Contribution: %s",
                     assessment.isCompleted() ? GradeFormatter.percent(assessment.getMark(), decimalPlaces) : "–",
                     assessment.isCompleted() ? GradeFormatter.percent(assessment.getContribution(), decimalPlaces) : "–"));
+
+            binding.getRoot().setOnClickListener(v -> {
+                if (editListener != null) editListener.onEdit(assessment);
+            });
 
             binding.btnDeleteAssessment.setOnClickListener(v -> {
                 if (listener != null) listener.onDelete(assessment);

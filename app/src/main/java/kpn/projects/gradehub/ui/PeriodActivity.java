@@ -2,6 +2,7 @@ package kpn.projects.gradehub.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -48,6 +49,7 @@ public class PeriodActivity extends AppCompatActivity {
 
         binding.toolbar.setTitle(periodName);
         binding.toolbar.setNavigationOnClickListener(v -> finish());
+        binding.toolbar.setOnMenuItemClickListener(this::onMenuItemClick);
 
         adapter = new ModuleAdapter(item ->
                 startActivity(new Intent(this, ModuleActivity.class)
@@ -73,5 +75,14 @@ public class PeriodActivity extends AppCompatActivity {
             binding.txtEmptyState.setVisibility(items.isEmpty() ? View.VISIBLE : View.GONE);
             binding.recyclerModules.setVisibility(items.isEmpty() ? View.GONE : View.VISIBLE);
         });
+    }
+
+    private boolean onMenuItemClick(MenuItem item) {
+        if (item.getItemId() == R.id.action_edit_period) {
+            startActivity(new Intent(this, AddPeriodActivity.class)
+                    .putExtra(AddPeriodActivity.EXTRA_PERIOD_ID, periodId));
+            return true;
+        }
+        return false;
     }
 }

@@ -22,11 +22,13 @@ import kpn.projects.gradehub.model.ModuleRepository;
 public class AddModuleActivity extends AppCompatActivity {
 
     public static final String EXTRA_PERIOD_ID = "extra_period_id";
+    public static final String EXTRA_MODULE_ID = "extra_module_id";
 
     private ActivityAddModuleBinding binding;
     private ModuleRepository repository;
     private long periodId;
     private Colour selectedColour = Colour.INDIGO;
+    private Module editingModule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +52,46 @@ public class AddModuleActivity extends AppCompatActivity {
 
         buildColourChips();
         binding.btnSaveModule.setOnClickListener(v -> save());
+
+        long moduleId = getIntent().getLongExtra(EXTRA_MODULE_ID, -1);
+        if (moduleId != -1) {
+            binding.toolbar.setTitle("Edit Module");
+            binding.btnSaveModule.setText(R.string.action_update);
+            repository.getModule(moduleId, this::bindForEdit);
+        }
+    }
+
+    private void bindForEdit(Module module) {
+        if (module == null) {
+            finish();
+            return;
+        }
+        editingModule = module;
+        periodId = module.getPeriodId();
+        binding.edtModuleCode.setText(module.getCode());
+        binding.edtModuleName.setText(module.getName());
+        binding.edtExamWeight.setText(formatNumber(module.getExamWeight()));
+        binding.switchExamEntranceRequired.setChecked(module.isExamEntranceRequired());
+        if (module.isExamEntranceRequired()) {
+            binding.edtExamEntranceMark.setText(formatNumber(module.getExamEntranceMark()));
+        }
+        if (module.getModuleColour() != null) {
+            selectColourChip(module.getModuleColour());
+        }
+    }
+
+    private void selectColourChip(Colour colour) {
+        selectedColour = colour;
+        for (int i = 0; i < binding.chipGroupColour.getChildCount(); i++) {
+            Chip chip = (Chip) binding.chipGroupColour.getChildAt(i);
+            chip.setChecked(chip.getTag() == colour);
+        }
     }
 
     private void buildColourChips() {
         for (Colour colour : Colour.values()) {
             Chip chip = new Chip(this);
+            chip.setTag(colour);
             chip.setCheckable(true);
             chip.setText(colour.name().substring(0, 1) + colour.name().substring(1).toLowerCase());
             int colourInt = Color.parseColor(colour.getHex());
@@ -90,11 +127,31 @@ public class AddModuleActivity extends AppCompatActivity {
         boolean entranceRequired = binding.switchExamEntranceRequired.isChecked();
         double entranceMark = entranceRequired ? parseOrZero(textOf(binding.edtExamEntranceMark)) : 0;
 
-        Module module = new Module(periodId, code, name, examWeight, entranceRequired, entranceMark, selectedColour);
-        repository.insert(module, id -> {
-            Toast.makeText(this, "Module added", Toast.LENGTH_SHORT).show();
-            finish();
-        });
+        if (editingModule != null) {
+            editingModule.setCode(code);
+            editingModule.setName(name);
+            editingModule.setExamWeight(examWeight);
+            editingModule.setExamEntranceRequired(entranceRequired);
+            editingModule.setExamEntranceMark(entranceMark);
+            editingModule.setModuleColour(selectedColour);
+            repository.update(editingModule, () -> {
+                Toast.makeText(this, "Module updated", Toast.LENGTH_SHORT).show();
+                finish();
+            });
+        } else {
+            Module module = new Module(periodId, code, name, examWeight, entranceRequired, entranceMark, selectedColour);
+            repository.insert(module, id -> {
+                Toast.makeText(this, "Module added", Toast.LENGTH_SHORT).show();
+                finish();
+            });
+        }
+    }
+
+    private String formatNumber(double value) {
+        if (value == Math.floor(value) && !Double.isInfinite(value)) {
+            return String.valueOf((long) value);
+        }
+        return String.valueOf(value);
     }
 
     private double parseOrZero(String text) {

@@ -59,4 +59,7 @@
     <string name="label_completed">Completed</string>
     <string name="label_class_mark">Class mark</string>
     <string name="label_exam">Exam</string>
+
+    <string name="action_edit">Edit</string>
+    <string name="action_update">Update</string>
 </resources>

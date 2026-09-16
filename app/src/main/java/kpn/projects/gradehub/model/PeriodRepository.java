@@ -188,4 +188,11 @@ public class PeriodRepository {
             executors.mainThread().execute(() -> callback.onResult(finalSuccess));
         });
     }
+
+    public void getPeriod(long id, DataCallback<Period> callback) {
+        executors.diskIO().execute(() -> {
+            Period period = periodDao.getPeriodById(id);
+            executors.mainThread().execute(() -> callback.onResult(period));
+        });
+    }
 }

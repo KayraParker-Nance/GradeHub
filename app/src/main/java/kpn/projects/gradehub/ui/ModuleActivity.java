@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -61,8 +62,13 @@ public class ModuleActivity extends AppCompatActivity {
         settings = new SettingsManager(this);
 
         binding.toolbar.setNavigationOnClickListener(v -> finish());
+        binding.toolbar.setOnMenuItemClickListener(this::onMenuItemClick);
 
-        adapter = new AssessmentAdapter(assessment -> confirmDeleteAssessment(assessment));
+        adapter = new AssessmentAdapter(
+                assessment -> confirmDeleteAssessment(assessment),
+                assessment -> startActivity(new Intent(this, AddAssessmentActivity.class)
+                        .putExtra(AddAssessmentActivity.EXTRA_MODULE_ID, moduleId)
+                        .putExtra(AddAssessmentActivity.EXTRA_ASSESSMENT_ID, assessment.getId())));
         binding.recyclerAssessments.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerAssessments.setAdapter(adapter);
 
@@ -204,5 +210,14 @@ public class ModuleActivity extends AppCompatActivity {
                         moduleRepository.delete(currentModule, this::finish))
                 .setNegativeButton(R.string.action_cancel, null)
                 .show();
+    }
+
+    private boolean onMenuItemClick(MenuItem item) {
+        if (item.getItemId() == R.id.action_edit_module) {
+            startActivity(new Intent(this, AddModuleActivity.class)
+                    .putExtra(AddModuleActivity.EXTRA_MODULE_ID, moduleId));
+            return true;
+        }
+        return false;
     }
 }
